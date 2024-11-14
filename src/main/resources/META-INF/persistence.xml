@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <!-- Each persistence Unit (PU) has a unique name -->
+    <persistence-unit name="my-pu" transaction-type="RESOURCE_LOCAL">
+
+        <!-- The entry class of the JPA implantation (the JPA provider) -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!--provider>org.hibernate.jpa.HibernatePersistenceProvider</provider-->
+
+        <!-- It is possible to include all entities from the same Jar -->
+        <!--exclude-unlisted-classes>false</exclude-unlisted-classes-->
+
+        <!-- otherwise they have to be listed here -->
+        <class>fr.univtln.bruno.samples.jpa.Artist</class>
+        <class>fr.univtln.bruno.samples.jpa.Song</class>
+
+        <properties>
+            <!-- RDBMS connection parameters -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/radio_db"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+            <property name="jakarta.persistence.jdbc.user" value="postgres" />
+            <property name="jakarta.persistence.jdbc.password" value="postgres" />
+
+            <!-- Table generation options -->
+            <!-- Direct creation: change at least to create in production -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
+
+            <!-- Also create DDL scripts -->
+            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create" />
+            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="create.ddl" />
+            <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="drop.ddl" />
+
+        </properties>
+    </persistence-unit>
+
+
+</persistence>
