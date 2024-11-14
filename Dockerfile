@@ -24,10 +24,10 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Copy the packaged application from the build stage
-COPY --from=build /app/target/testjdbc-1.0-SNAPSHOT.jar /app/testjdbc-1.0-SNAPSHOT.jar
+COPY --from=build /app/target/*.jar /app/app.jar
 
 # Expose the port the application runs on
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "testjdbc-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
